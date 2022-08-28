@@ -41,6 +41,7 @@ alias list_systemctl="systemctl list-unit-files --state=enabled"
 
 # custom stuff
 alias v='nvim'
+alias l='lvim'
 alias ccht='curl cht.sh'
 alias cht='cht.sh'
 alias down='downgrade'
