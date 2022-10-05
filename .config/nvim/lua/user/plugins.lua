@@ -61,15 +61,61 @@ return packer.startup(function(use)
   -------------------
 
   use {
-   "kyazdani42/nvim-tree.lua",
-   requires = {
-     "kyazdani42/nvim-web-devicons",
-   },
-   cmd = { "NvimTreeToggle", "NvimTreeClose" },
-   config = function()
-     require("user.plugins.nvim-tree")
-   end,
+    "kyazdani42/nvim-tree.lua",
+    requires = {
+        "kyazdani42/nvim-web-devicons",
+     },
+     cmd = { "NvimTreeToggle", "NvimTreeClose" },
+     config = function()
+      require("user.plugins.nvim-tree")
+    end,
   }
+
+  ---------
+  -- LSP --
+  ---------
+
+  use "neovim/nvim-lspconfig"
+  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+
+  ----------------------------
+  -- Completions + Snippets --
+  ----------------------------
+  use { 
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require("user.lsp.cmp")
+    end,
+  }
+  use "hrsh7th/cmp-buffer" -- buffer completions
+  use "hrsh7th/cmp-path" -- path completions
+  use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lua"
+
+  use "L3MON4D3/LuaSnip" --snippet engine
+  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+
+  -----------------------------------
+  -- Treesitter: Better Highlights --
+  -----------------------------------
+
+  -- use({
+  --   {
+  --     'nvim-treesitter/nvim-treesitter',
+  --     event = 'CursorHold',
+  --     run = ':TSUpdate',
+  --     config = function()
+  --       require('user.plugins.treesitter')
+  --     end,
+  --   },
+  --   { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
+  --   { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
+  --   { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
+  --   { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' },
+  --   { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' },
+  -- })
 
   ----------------------------------------
   -- Theme, Icons, Statusbar, Bufferbar --
@@ -85,29 +131,29 @@ return packer.startup(function(use)
     {
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-      config = function()
-        require('user.plugins.lualine')
-      end,
-    },
-    {
-      'j-hui/fidget.nvim',
-      after = 'lualine.nvim',
-      config = function()
-        require('fidget').setup()
-      end,
-    }
-  })
+        config = function()
+          require('user.plugins.lualine')
+        end,
+      },
+      {
+        'j-hui/fidget.nvim',
+        after = 'lualine.nvim',
+        config = function()
+          require('fidget').setup()
+        end,
+      }
+    })
 
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
 
   ------------------
   -- Colorschemes --
   ------------------
-  
+
   use "RRethy/nvim-base16"
   use "nxvu699134/vn-night.nvim"
   use "titanzero/zephyrium"
-
+  use "navarasu/onedark.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
