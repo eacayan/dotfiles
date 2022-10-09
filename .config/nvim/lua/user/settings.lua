@@ -60,3 +60,6 @@ opt.wildignore:append "**/build/*"
 -- Map <leader> to space
 g.mapleader = ' '
 g.maplocalleader = ' '
+
+-- Notification Manager
+vim.notify = require ("notify")

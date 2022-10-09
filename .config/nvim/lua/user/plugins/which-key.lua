@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
   local whichkey = require "which-key"
+  local keymap_f = nil -- File search
 
   local conf = {
     window = {
@@ -40,12 +41,24 @@ function M.setup()
     },
     f = {
       name = "Find",
-      f = { "<cmd>lua require('utils.finder').find_files()<cr>", "Files" },
-      b = { "<cmd>FzfLua buffers<cr>", "Buffers" },
-      o = { "<cmd>FzfLua oldfiles<cr>", "Old files" },
-      g = { "<cmd>FzfLua live_grep<cr>", "Live grep" },
-      c = { "<cmd>FzfLua commands<cr>", "Commands" },
+      f = { "<cmd>lua require('telescope.builtin').find_files({no_ignore = false, hidden = true})<cr>", "Files" },
+      b = { "<cmd>lua require('telescope.builtin').buffers()<cr>", "Buffers" },
+      h = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Help" },
+      m = { "<cmd>lua require('telescope.builtin').marks()<cr>", "Marks" },
+      o = { "<cmd>lua require('telescope.builtin').oldfiles()<cr>", "Old Files" },
+      g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Live Grep" },
+      c = { "<cmd>lua require('telescope.builtin').commands()<cr>", "Commands" },   
+      r = { "<cmd>lua require'telescope'.extensions.file_browser.file_browser({path = '%:p:h', cwd = vim.fn.expand('%:p:h'), respect_gitignore = false, hidden = true, grouped = true,previewer = false,initial_mode = 'normal', layout_config = { height = 40 }})<cr>", "File Browser" }
+      
     },
+    -- f = {
+    --   name = "Find",
+    --   f = { "<cmd>lua require('utils.finder').find_files()<cr>", "Files" },
+    --   b = { "<cmd>FzfLua buffers<cr>", "Buffers" },
+    --   o = { "<cmd>FzfLua oldfiles<cr>", "Old files" },
+    --   g = { "<cmd>FzfLua live_grep<cr>", "Live grep" },
+    --   c = { "<cmd>FzfLua commands<cr>", "Commands" },
+    -- },
     --g = {
       --name = "Git",
       --s = { "<cmd>Neogit<CR>", "Status" },

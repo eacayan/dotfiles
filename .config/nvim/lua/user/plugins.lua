@@ -34,106 +34,18 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- My plugins here
+    ------------
+    -- Packer --
+    ------------
+    use 'wbthomason/packer.nvim'
 
-  ---------------------
-  -- Package Manager --
-  ---------------------
-  use 'wbthomason/packer.nvim' -- Have packer manage itself
-
-  ----------------------
-  -- Required plugins --
-  ----------------------
-  use('nvim-lua/plenary.nvim')
-
-  -----------------
-  -- Keymappings --
-  -----------------
-  use {
-     "folke/which-key.nvim",
-     config = function()
-       require("user.plugins.whichkey").setup()
-     end,
-  }
-
-  -------------------
-  -- File Explorer --
-  -------------------
-
-  use {
-    "kyazdani42/nvim-tree.lua",
-    requires = {
-        "kyazdani42/nvim-web-devicons",
-     },
-     cmd = { "NvimTreeToggle", "NvimTreeClose" },
-     config = function()
-      require("user.plugins.nvim-tree")
-    end,
-  }
-
-  ---------
-  -- LSP --
-  ---------
-
-  use "neovim/nvim-lspconfig"
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-
-  ----------------------------
-  -- Completions + Snippets --
-  ----------------------------
-  use { 
-    "hrsh7th/nvim-cmp",
-    config = function()
-      require("user.lsp.cmp")
-    end,
-  }
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-nvim-lua"
-
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-
-  -----------------------------------
-  -- Treesitter: Better Highlights --
-  -----------------------------------
-
-  -- use({
-  --   {
-  --     'nvim-treesitter/nvim-treesitter',
-  --     event = 'CursorHold',
-  --     run = ':TSUpdate',
-  --     config = function()
-  --       require('user.plugins.treesitter')
-  --     end,
-  --   },
-  --   { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
-  --   { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
-  --   { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
-  --   { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' },
-  --   { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' },
-  -- })
-
-  ----------------------------------------
-  -- Theme, Icons, Statusbar, Bufferbar --
-  ----------------------------------------
-
-  use({
-    'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('nvim-web-devicons').setup()
-    end,
-  })
-  use({
-    {
-      'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        config = function()
-          require('user.plugins.lualine')
-        end,
+    ----------------------------
+    -- Statusline, Bufferline --
+    ----------------------------
+    use({
+      {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
       },
       {
         'j-hui/fidget.nvim',
@@ -142,22 +54,98 @@ return packer.startup(function(use)
           require('fidget').setup()
         end,
       }
-    })
+    }) -- Statusline
+    use 'romgrk/barbar.nvim' -- Bufferline
 
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
+    ---------------
+    -- Utilities --
+    ---------------
+    use 'nvim-lua/plenary.nvim' -- Common utilities
+    use 'kyazdani42/nvim-web-devicons' -- File icons
+    use 'onsails/lspkind-nvim' -- vscode-like pictograms
+    use 'windwp/nvim-autopairs'
+    use 'windwp/nvim-ts-autotag'
+    use 'norcalli/nvim-colorizer.lua'
+    use 'folke/zen-mode.nvim'
+    use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
+    use "rcarriga/nvim-notify" -- Notification manager  
 
-  ------------------
-  -- Colorschemes --
-  ------------------
+    ----------------
+    -- Completion --
+    ----------------
+    use 'hrsh7th/nvim-cmp' -- Completion
+    use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
+    use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
 
-  use "RRethy/nvim-base16"
-  use "nxvu699134/vn-night.nvim"
-  use "titanzero/zephyrium"
-  use "navarasu/onedark.nvim"
+    ---------
+    -- LSP --
+    ---------
+    use {
+      'neovim/nvim-lspconfig',
+      config = function()
+         require("user.plugins.lspconfig")
+      end,
+    } -- LSP
+    use 'williamboman/mason.nvim' -- LSP Installer
+    use 'williamboman/mason-lspconfig.nvim'
+    use {
+      'jose-elias-alvarez/null-ls.nvim',
+      config = function()
+        require('user.plugins.null-ls')
+      end,
+    } -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+    use {
+      'glepnir/lspsaga.nvim',
+      config = function ()
+        require('user.plugins.lspsaga')
+      end,
+    } -- LSP UIs
+    use 'MunifTanjim/prettier.nvim' -- Prettier plugin for Neovim's built-in LSP client
+    use 'L3MON4D3/LuaSnip'
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require('packer').sync()
-  end
+    ----------------
+    -- Treesitter --
+    ----------------
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    }
+
+    -------------------
+    -- Tree Explorer --
+    -------------------
+    use 'kyazdani42/nvim-tree.lua'
+
+    ---------------
+    -- Telescope --
+    ---------------
+    use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope-file-browser.nvim'
+
+    -----------------
+    -- Keymappings --
+    -----------------
+    use {
+      "folke/which-key.nvim",
+      config = function()
+         require("user.plugins.which-key").setup()
+      end,
+    }
+
+    ------------------
+    -- Colorschemes --
+    ------------------
+    use "navarasu/onedark.nvim"
+
+    ---------
+    -- Git --
+    ---------
+    use 'lewis6991/gitsigns.nvim'
+    use 'dinhhuy258/git.nvim' -- For git blame & browse
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if PACKER_BOOTSTRAP then
+      require('packer').sync()
+    end
 end)
