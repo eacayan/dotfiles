@@ -2,11 +2,11 @@
 local status, telescope = pcall(require, "telescope")
 if (not status) then return end
 local actions = require('telescope.actions')
-local builtin = require("telescope.builtin")
-
-local function telescope_buffer_dir()
-  return vim.fn.expand('%:p:h')
-end
+-- local builtin = require("telescope.builtin")
+--
+-- local function telescope_buffer_dir()
+--   return vim.fn.expand('%:p:h')
+-- end
 
 local fb_actions = require "telescope".extensions.file_browser.actions
 
@@ -42,3 +42,4 @@ telescope.setup {
 }
 
 telescope.load_extension("file_browser")
+telescope.load_extension("lazygit")

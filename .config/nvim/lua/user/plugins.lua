@@ -65,6 +65,7 @@ return packer.startup(function(use)
     use 'onsails/lspkind-nvim' -- vscode-like pictograms
     use 'windwp/nvim-autopairs'
     use 'windwp/nvim-ts-autotag'
+    use 'terrortylor/nvim-comment'
     use 'norcalli/nvim-colorizer.lua'
     use 'folke/zen-mode.nvim'
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
@@ -119,8 +120,19 @@ return packer.startup(function(use)
     ---------------
     -- Telescope --
     ---------------
-    use 'nvim-telescope/telescope.nvim'
+    use({
+        "nvim-telescope/telescope.nvim",
+        requires = { { "nvim-lua/plenary.nvim" }, { "kdheepak/lazygit.nvim" } },
+        config = function()
+            require("telescope").load_extension("lazygit")
+        end,
+    })
     use 'nvim-telescope/telescope-file-browser.nvim'
+
+    --------------
+    -- Terminal --
+    --------------
+    use 'akinsho/toggleterm.nvim'
 
     -----------------
     -- Keymappings --
@@ -140,8 +152,8 @@ return packer.startup(function(use)
     ---------
     -- Git --
     ---------
+    use 'kdheepak/lazygit.nvim' -- Lazygit integration with Neovim
     use 'lewis6991/gitsigns.nvim'
-    use 'dinhhuy258/git.nvim' -- For git blame & browse
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
