@@ -65,4 +65,4 @@ alias gpod='git pull origin develop'
 alias python='python3'
 
 # dotfiles
-alias config='/usr/bin/git --git-dir=/home/ellice/dots/ --work-tree=/home/ellice'
+alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
