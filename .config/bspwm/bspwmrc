@@ -16,10 +16,8 @@ sxhkd &
 	#xrandr --output Virtual1 --primary --mode 1920x1080 --rotate normal --output Virtual2 --mode 1920x1080 --rotate normal --left-of Virtual1
 #fi
 
-~/.config/polybar/launch.sh
-
 #pgrep -x sxhkd > /dev/null || sxhkd &
-#$HOME/.config/polybar/launch.sh
+$HOME/.config/polybar/launch.sh
 
 # colors
 FOCUSED_BORDER_COLOR="#5b1d4a"
@@ -27,9 +25,9 @@ NORMAL_BORDER_COLOR="#5b5558"
 ACTIVE_BORDER_COLOR="#262734"
 PRESEL_FEEDBACK_COLOR="#D6A36A"
 
-#bspc monitor Virtual1 -d 1 2 3 4 5
-#bspc monitor Virtual2 -d 6 7 8 9 10 
-bspc monitor Virtual1 -d 1 2 3 4 5 6 7 8 9 10
+bspc monitor DP-1 -d 1 2 3 4 5
+bspc monitor HDMI-0 -d 6 7 8 9 10 
+# bspc monitor Virtual1 -d 1 2 3 4 5 6 7 8 9 10
 
 bspc config border_width         0
 bspc config window_gap           6
@@ -54,6 +52,6 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Zathura  desktop='^5' state=tiled
 
-feh --bg-fill $HOME/Pictures/wallpapers/wallpaper7.jpg
+feh --bg-fill $HOME/.config/themes/1.jpg
 xsetroot -cursor_name left_ptr &
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Terminate already running bar instances
 killall -q polybar
@@ -7,9 +7,9 @@ killall -q polybar
 
 # Launch bar1 and bar2
 echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
-polybar main 2>&1 | tee -a /tmp/polybar1.log & disown
-if [[ $(xrandr -q | grep 'Virtual2 connected') ]]; then
-	polybar main2 2>&1 | tee -a /tmp/polybar1.log & disown
+polybar main2 2>&1 | tee -a /tmp/polybar1.log & disown
+if [[ $(xrandr -q | grep 'DP-1 connected') ]]; then
+	polybar main 2>&1 | tee -a /tmp/polybar1.log & disown
 fi
 echo "Bars launched..."
 

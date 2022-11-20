@@ -6,6 +6,10 @@
 super + Return
 	kitty
 
+# firefox
+super + b
+  firefox
+
 # program launcher
 super + @space
 	  rofi -modi run,drun,window -show drun -show-icons -sidebar-mode 
