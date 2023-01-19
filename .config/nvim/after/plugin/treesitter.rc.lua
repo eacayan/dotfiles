@@ -24,7 +24,8 @@ ts.setup {
     "html",
     "lua",
     "go",
-    "graphql"
+    "graphql",
+    "markdown"
   },
   autotag = {
     enable = true,
