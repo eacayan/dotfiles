@@ -1,0 +1,1 @@
+require("ellice.plugins.colorschemes.tokyonight")

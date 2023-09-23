@@ -1,7 +1,6 @@
-require('user.plugins')
-require('user.settings')
-require('user.keymaps')
-require('onedark').setup {
-  style = 'deep'
-}
-require('onedark').load()
+require("ellice.plugins-setup")
+require("ellice.plugins.lsp")
+require("ellice.plugins")
+require("ellice.core.options")
+require("ellice.core.keymaps")
+
